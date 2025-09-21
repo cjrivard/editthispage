@@ -1089,24 +1089,29 @@ switch ($display_step):
 
     case $steps['guest_access']:
         ?>
-        <h2>Guest Access</h2>
+        <h4>Guest Access</h4>
         <p>
         Do you want to make this page publicly accessible?
         </p>
-        <p>
+        <div class="alert alert-info">
         If "yes", a default guest account will be created in the next step. This does not give guests
-        editing permissions. Do not delete this account, or anonymous visitors will not be able to view the page. 
-        </p>
-        <p>
+        editing permissions. Do not delete this account, or anonymous visitors will not be able to view the page.
+        </div>
+        
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="process" value="1" />
         <input type="hidden" name="install_step" value="<?= $steps['guest_access'] ?>" />
-        <input type="checkbox" name="guest_access_allowed" value="true"<?= $guest_access_allowed  == "true" ? ' checked' : '' ?> /> Yes
-        </p>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="guest_access_allowed" name="guest_access_allowed" value="true"<?= $guest_access_allowed  == "true" ? ' checked' : '' ?> />
+          <label class="form-check-label" for="guest_access_allowed">
+            Yes, make this page publicly accessible
+          </label>
+        </div>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['guest_access'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <input class="btn btn-secondary" type="button" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['guest_access'] ?>'" value="&lt;&lt; Back" />
+        <input class="btn btn-primary" type="submit" value="Next &gt;&gt;" />
+        <input class="btn btn-success" type="submit" value="Finish" name="finish">
         </div>
 
         </form>
@@ -6190,22 +6195,33 @@ break;
             . '/* VERSION */' . "\n"
 
             . '/* PAGE_HEADER */' . "\n"
-            . '// <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . "\n"
-            . '// <html>' . "\n"
+            . '// <!DOCTYPE html>' . "\n"
+            . '// <html lang="en">' . "\n"
 
             . '// <head>' . "\n"
+            . '// <meta charset="utf-8">' . "\n"
+            . '// <meta name="viewport" content="width=device-width, initial-scale=1">' . "\n"
             . '// <title>EditThisPage</title>' . "\n"
+            . '// <link href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">' . "\n"
 
             . '// __META_RSS_AUTODISCOVERY__' . "\n"
             . '// __TRACKBACK_RDF__' . "\n"
 
             . '// </head>' . "\n"
             . '// <body>' . "\n"
+            . '// <div class="container mt-4">' . "\n"
             . '/* PAGE_HEADER */' . "\n"
 
             . '/* PAGE_MAIN_CONTENT */' . "\n"
+            . '// <div class="row">' . "\n"
+            . '// <div class="col-md-8">' . "\n"
             . '// <p>__RSS_FEED__</p>' . "\n"
             . '// <p>__RSS_DIFF_FEED__</p>' . "\n"
+            . '// </div>' . "\n"
+            . '// <div class="col-md-4">' . "\n"
+            . '// __EDIT_BUTTON__' . "\n"
+            . '// </div>' . "\n"
+            . '// </div>' . "\n"
             . '/* PAGE_MAIN_CONTENT */' . "\n"
 
             . '/* PAGE_FOOTER */' . "\n"
@@ -6218,7 +6234,8 @@ break;
 
             . '// __HIDDEN_AREA_END__' . "\n"
 
-            . '// __EDIT_BUTTON__' . "\n"
+            . '// </div>' . "\n"
+            . '// <script src="https://unpkg.com/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>' . "\n"
             . '// </body>' . "\n"
             . '// </html>' . "\n"
             . '/* PAGE_FOOTER */' . "\n"
@@ -6645,12 +6662,13 @@ if (isset($display['page'])) {
 // start page header
 // this will be the same for all admin pages
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= $title ?></title>
+<link href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 
 /* style for submit buttons with class="submit" */
@@ -8152,24 +8170,34 @@ endif;
 /* VERSION */
 
 /* PAGE_HEADER */
-// <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-// <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+// <!DOCTYPE html>
+// <html lang="en">
 // <head>
-// <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+// <meta charset="utf-8">
+// <meta name="viewport" content="width=device-width, initial-scale=1">
 // <title>%%TITLE%%</title>
+// <link href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 // __META_RSS_AUTODISCOVERY__
 // __TRACKBACK_RDF__
 // </head>
 // <body>
+// <div class="container mt-4">
 /* PAGE_HEADER */
 
 /* PAGE_MAIN_CONTENT */
+// <div class="row">
+// <div class="col-md-8">
 // <p>
 // __RSS_FEED__
 // </p>
 // <p>
 // __RSS_DIFF_FEED__
 // </p>
+// </div>
+// <div class="col-md-4">
+// __EDIT_BUTTON__
+// </div>
+// </div>
 /* PAGE_MAIN_CONTENT */
 
 /* PAGE_FOOTER */
@@ -8179,8 +8207,8 @@ endif;
 // __COMMENT_FORM__
 // __TRACKBACKS__
 // __HIDDEN_AREA_END__
-// __EDIT_BUTTON__
-// <div style="clear:both">&nbsp;</div>
+// </div>
+// <script src="https://unpkg.com/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 // </body>
 // </html>
 /* PAGE_FOOTER */
