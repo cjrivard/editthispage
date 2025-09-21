@@ -870,241 +870,105 @@ if ($finalize || $install_step == $steps['confirm']) {
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EditThisPage Install v0.8</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <style type="text/css">
-body, table, th, td {
-    font-family: arial, helvetica, sans-serif;
-    font-size: 10pt;
-}
-
-th {
-    font-style:normal;
-    font-weight:700;
-    text-align:left;
-}
-
-h1 {
-    margin-top:0px;
-    padding-top:0px;
-    margin-bottom:0px;
-    padding-bottom:0px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:14pt;
-    color: #676d87;
-    float:right;
-    height:20px;
-}
-
-h2 {
-    margin-top:0px;
-    padding-top:10px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:12pt;
-    color: #676d87;
-    border-bottom: 1px solid #b7bdc7;
-}
-
-em {
-    font-style: normal;
-    font-weight: 700;
-}
-
-form {
-    padding: 0px;
-    margin: 0px;
-}
-
-.formbutton {
-    margin: 3px;
-    padding: 0px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:10pt;
-    width: 120px;
-    border:1px solid;
-    border-color:#666 #333 #333 #666;
-    background-color: #b7bdc7;
-}
-
+/* Custom styles to complement Bootstrap */
 .ok {
-    color: #085;
+    color: #198754;
+    font-weight: 600;
 }
-.notok{
-    color: #900;
-}
-
-.buttoncontainer {
-    text-align:right;
-    margin-top: 30px;
- }
-
-#container {
-    position:relative;
-    width:730px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:50px;
-    padding: 5px;
-
-    background-color:#e4e7ed;
-    border:2px solid #b7bdc7;
+.notok {
+    color: #dc3545;
+    font-weight: 600;
 }
 
-#steps {
-    position:absolute;
-    padding: 3px 3px 10px 3px;
-    top:38px;
-    left:5px;
-    width:120px;
-    font-size:8pt;
+.install-steps .nav-link {
+    color: #495057;
+    border-radius: 0;
+    border: none;
+    padding: 0.5rem 0.75rem;
 }
 
-#steps a {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    color:#000;
-}
-#steps a:visited {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    color:#000;
-}
-#steps a:hover {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: underline;
-    color:#000;
-}
-#steps a:active {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: underline;
-    color:#000;
+.install-steps .nav-link:hover {
+    color: #007bff;
+    background-color: #e9ecef;
 }
 
-#steps li {
-    margin-top: 3px;
-    margin-bottom: 3px;
+.install-steps .nav-link.active {
+    color: #198754;
+    font-weight: 600;
+    background-color: #e7f3e7;
 }
 
-#steps li:hover, #steps li.over {
-	color: #e90;
+.install-header {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
 }
 
-#steps ul {
-    margin: 2px 0px 0px 15px;
-    padding: 0px;
-    list-style-type: disc;
-	color: #00c;
+.install-card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
-
-#config {
-    margin: 0px 0px 0px 145px;
-    padding: 7px;
-    width:576px;
-    clear:right;
-    background-color:#e4e7ed;
-}
-
-#config a {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: none;
-    color:#229;
-}
-#config a:visited {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: none;
-    color:#229;
-}
-#config a:hover {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: underline;
-    color:#229;
-}
-#config a:active {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: underline;
-    color:#229;
-}
-
-.error {
-    font-weight: 700;
-}
-
 </style>
 
 
-<script type="text/javascript">
-// add li:hover to IE
-startList = function() {
-	if (document.all && document.getElementById) {
-		navRoot = document.getElementById("stepslist");
-		for (i=0; i<navRoot.childNodes.length; i++) {
-			node = navRoot.childNodes[i];
-			if (node.nodeName=="LI") {
-				node.onmouseover=function() {
-					this.className+=" over";
-				}
-				node.onmouseout=function() {
-					this.className=this.className.replace(" over", "");
-				}
-			}
-		}
-	}
-}
-window.onload=startList;
-
-</script>
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="container">
-<div id="steps">
-<ul id="stepslist">
-<?php
-foreach ($install_labels as $k => $v):
-    if ($display_step == $k) {
-        $bulletstyle = ' style="color:#085;"';
-        $linkstyle = ' style="font-weight:700"';
-    } else {
-        $bulletstyle = '';
-        $linkstyle = '';
-    }
-    if ($k == $steps['install']) :
-        ?>
-        <li<?= $bulletstyle ?>><a<?= $linkstyle ?> href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['confirm'] ?>"><?= $v ?></a></li>
-        <?php
-    else:
-        ?>
-        <li<?= $bulletstyle ?>><a<?= $linkstyle ?> href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $k ?>"><?= $v ?></a></li>
-        <?php
-    endif;
-endforeach;
-?>
-</ul>
+<div class="install-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="h2 mb-0">EditThisPagePHP Install v0.8</h1>
+                <p class="mb-0 opacity-75">Modern wiki/CMS installation wizard</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="config">
-<h1>EditThisPagePHP Install v0.8</h1>
-<div style="clear:both"></div>
-
-<?php
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card install-card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Installation Steps</h5>
+                </div>
+                <div class="card-body p-0">
+                    <nav class="nav nav-pills flex-column install-steps">
+                        <?php
+                        foreach ($install_labels as $k => $v):
+                            $activeClass = ($display_step == $k) ? ' active' : '';
+                            $href = ($k == $steps['install']) ? 
+                                $_SERVER['PHP_SELF'] . '?install_step=' . $steps['confirm'] :
+                                $_SERVER['PHP_SELF'] . '?install_step=' . $k;
+                            ?>
+                            <a class="nav-link<?= $activeClass ?>" href="<?= $href ?>"><?= $v ?></a>
+                        <?php endforeach; ?>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="card install-card">
+                <div class="card-body"><?php
 // display dialog
 switch ($display_step):
     // initial tests
     case $steps['test']:
         ?>
-        <h2>Testing Your Setup</h2>
-        <table style="width:100%;">
+        <h2 class="card-title">Testing Your Setup</h2>
+        <table class="table table-sm table-hover">
+        <tbody>
         <tr><td>
         Can we write to the install script?
         </td><td>
@@ -1137,6 +1001,7 @@ switch ($display_step):
         endif;
         ?>
 
+        </tbody>
         </table>
 
         <?php
@@ -1168,8 +1033,8 @@ switch ($display_step):
             <form action="<?= $PHP_SELF ?>" method="post">
             <input type="hidden" name="install_step" value="<?= $steps['test'] ?>">
 
-            <div class="buttoncontainer">
-            <input class="formbutton" type="submit" value="Test Again">
+            <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-warning">Test Again</button>
             </div>
 
             </form>
@@ -1190,8 +1055,9 @@ switch ($display_step):
             <form action="<?= $PHP_SELF ?>" method="post">
             <input type="hidden" name="install_step" value="<?= $next_steps['test'] ?>">
 
-            <div class="buttoncontainer">
-            <input class="formbutton" type="submit" value="Next &gt;&gt;"><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+            <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">Next &gt;&gt;</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
             </div>
 
             </form>
@@ -1203,26 +1069,30 @@ switch ($display_step):
 
     case $steps['hostname']:
         ?>
-        <h2>Set Hostname</h2>
+        <h2 class="card-title">Set Hostname</h2>
         <p>
         Set the hostname of the server. This will be used for creating links to RSS feeds, administration
         functions and images.
         </p>
-        <p>
-        The hostname appears to be <?= $_SERVER['SERVER_NAME'] ?>
-        <?= isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != $_SERVER['SERVER_NAME'] ? ' or ' . $_SERVER['HTTP_HOST'] :'' ?>
-        </p>
+        <div class="alert alert-info">
+        The hostname appears to be <strong><?= $_SERVER['SERVER_NAME'] ?></strong>
+        <?= isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != $_SERVER['SERVER_NAME'] ? ' or <strong>' . $_SERVER['HTTP_HOST'] . '</strong>' :'' ?>
+        </div>
 
-        <p>
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="install_step" value="<?= $steps['hostname'] ?>" />
         <input type="hidden" name="process" value="1" />
-        <input type="text" name="server_name" value="<?= $CFG['server_name'] ? $CFG['server_name'] : $_SERVER['SERVER_NAME'] ?>">
-        </p>
+        <div class="mb-3">
+            <label for="server_name" class="form-label">Server Name:</label>
+            <input type="text" name="server_name" id="server_name" class="form-control" value="<?= $CFG['server_name'] ? $CFG['server_name'] : $_SERVER['SERVER_NAME'] ?>">
+        </div>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['hostname'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-flex justify-content-between gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['hostname'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1233,24 +1103,29 @@ switch ($display_step):
 
     case $steps['guest_access']:
         ?>
-        <h2>Guest Access</h2>
+        <h2 class="card-title">Guest Access</h2>
         <p>
         Do you want to make this page publicly accessible?
         </p>
-        <p>
+        <div class="alert alert-warning">
         If "yes", a default guest account will be created in the next step. This does not give guests
         editing permissions. Do not delete this account, or anonymous visitors will not be able to view the page. 
-        </p>
-        <p>
+        </div>
+        
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="process" value="1" />
         <input type="hidden" name="install_step" value="<?= $steps['guest_access'] ?>" />
-        <input type="checkbox" name="guest_access_allowed" value="true"<?= $guest_access_allowed  == "true" ? ' checked' : '' ?> /> Yes
-        </p>
+        <div class="form-check mb-4">
+            <input type="checkbox" name="guest_access_allowed" value="true" id="guest_access" class="form-check-input"<?= $guest_access_allowed  == "true" ? ' checked' : '' ?> />
+            <label for="guest_access" class="form-check-label">Yes, allow public access</label>
+        </div>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['guest_access'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-flex justify-content-between gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['guest_access'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1260,34 +1135,45 @@ switch ($display_step):
 
     case $steps['create_accounts']:
         ?>
-        <h2>Create Accounts</h2>
-        <p><em>Create accounts for users:</em> guest accounts can view the page. Editors have access to
+        <h2 class="card-title">Create Accounts</h2>
+        <div class="alert alert-info">
+        <strong>Create accounts for users:</strong> guest accounts can view the page. Editors have access to
         image and history functions, and can edit the main body content of the page. Super-editors
-        can access all functions. You should have at least one super-editor account.</p>
+        can access all functions. You should have at least one super-editor account.
+        </div>
         <p>Setting an email address will send notifications to that user of changes to the page, if
         this is enabled in the next step.</p>
 
         <?php
         if (empty($users)):
             ?>
-            <p>No accounts have been created.</p>
+            <div class="alert alert-warning">No accounts have been created.</div>
             <?php
         else:
             ?>
-            <table style="width:100%;">
+            <table class="table table-striped table-hover">
+            <thead class="table-light">
             <tr>
             <th>Username</th>
             <th>Group</th>
             <th>Email</th>
-            <th>&nbsp;</th>
+            <th>Actions</th>
             </tr>
+            </thead>
+            <tbody>
 
             <?php
             foreach ($users as $k => $v):
                 ?>
                 <tr>
                 <td><?= htmlClean($v['name']) ?></td>
-                <td><?= htmlClean($v['group']) ?></td>
+                <td>
+                    <?php
+                    $badgeClass = $v['group'] == 'super-editor' ? 'bg-success' : 
+                                  ($v['group'] == 'editor' ? 'bg-primary' : 'bg-secondary');
+                    ?>
+                    <span class="badge <?= $badgeClass ?>"><?= htmlClean($v['group']) ?></span>
+                </td>
                 <td><?= htmlClean($v['email']) ?></td>
                 <td>
                 <?php
@@ -1297,23 +1183,25 @@ switch ($display_step):
                     $title = 'Delete user account';
                 }
                 ?>
-                <a href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['create_accounts'] ?>&process=1&deluser=<?= $k ?>" title="<?= $title ?>">Delete</a>
+                <a href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['create_accounts'] ?>&process=1&deluser=<?= $k ?>" 
+                   class="btn btn-sm btn-outline-danger" title="<?= $title ?>">Delete</a>
                 </td>
                 </tr>
 
                 <?php
             endforeach;
             ?>
+            </tbody>
             </table>
             <?php
         endif;
         ?>
 
-        <h2>Add User</h2>
+        <h3 class="mt-4">Add User</h3>
         <?php
         if (isset($msgs['failed_add_user']) && $msgs['failed_add_user']):
             ?>
-            <p><?= $msgs['failed_add_user'] ?></p>
+            <div class="alert alert-danger"><?= $msgs['failed_add_user'] ?></div>
             <?php
         endif;
         ?>
@@ -1321,53 +1209,34 @@ switch ($display_step):
         <input type="hidden" name="install_step" value="<?= $steps['create_accounts'] ?>" />
         <input type="hidden" name="process" value="1" />
 
-        <table style="width:100%">
-        <tr>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="group" class="form-label">Group</label>
+                <select name="group" id="group" class="form-select">
+                    <option value="guest">Guest</option>
+                    <option value="editor">Editor</option>
+                    <option value="super-editor">Super-editor</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <label for="email" class="form-label">Email <span class="text-muted">(optional)</span></label>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+            </div>
+        </div>
 
-        <td>
-        Username
-        </td><td>
-        <input type="text" name="username">
-        </td>
-
-        <td>
-        Group
-        </td><td>
-        <select name="group">
-        <option value="guest">Guest</option>
-        <option value="editor">Editor</option>
-        <option value="super-editor">Super-editor</option>
-        </select>
-        </td>
-
-        </tr><tr>
-
-        <td>
-        Email
-        (optional)
-        </td><td colspan="3">
-        <input type="text" name="email">
-        </td>
-
-        </tr><tr>
-
-        <td>
-        Password
-        </td><td>
-        <input type="password" name="password">
-        </td>
-
-        <td>
-        Confirm
-        </td><td>
-        <input type="password" name="confirm_password">
-        </td>
-
-        </tr>
-
-        </table>
-
-        <script language="Javascript1.2">
+        <script>
         function checkAccountFields()
         {
             if (document.user_form.username.value == ''
@@ -1379,14 +1248,14 @@ switch ($display_step):
             }
             return true;
         }
-
         </script>
-        <div style="text-align:right;margin-top:10px;">
-        <input class="formbutton"  type="submit" value="Add User" onclick="return checkAccountFields()" />
+        
+        <div class="d-flex justify-content-end mt-3">
+            <button type="submit" class="btn btn-success" onclick="return checkAccountFields()">Add User</button>
         </div>
         </form>
 
-        <script language="Javascript1.2">
+        <script>
         function accountFieldsEmpty()
         {
             if (document.user_form.username.value != ''
@@ -1399,14 +1268,16 @@ switch ($display_step):
                     + "\n\"Ok\" will proceed.");
             }
         }
-
         </script>
 
-        <form action="<?= $PHP_SELF ?>" method="post">
+        <form action="<?= $PHP_SELF ?>" method="post" class="mt-4">
         <input type="hidden" name="install_step" value="<?= $next_steps['create_accounts'] ?>" />
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['create_accounts'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton"  type="submit" value="Next &gt;&gt;" onclick="return accountFieldsEmpty()" /><br /><input class="formbutton" type="submit" value="Finish" name="finish" onclick="return accountFieldsEmpty()" />
+        <div class="d-flex justify-content-between gap-2">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['create_accounts'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary" onclick="return accountFieldsEmpty()">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success" onclick="return accountFieldsEmpty()">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1415,7 +1286,7 @@ switch ($display_step):
 
     case $steps['email_notifications']:
         ?>
-        <h2>Notify Users on Page Changes</h2>
+        <h2 class="card-title">Notify Users on Page Changes</h2>
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="install_step" value="<?= $steps['email_notifications'] ?>" />
         <input type="hidden" name="process" value="1" />
@@ -1428,42 +1299,51 @@ switch ($display_step):
         }
         if ($ulist):
         ?>
-        <p>Should the users (<?= $ulist ?>) be emailed when a page has been modified?
-        <br />
-        <input type="checkbox" name="email_users"<?= $CFG['email_users'] == "true" ? ' checked' : ''?>> Yes
-        </p>
+        <div class="form-check mb-4">
+            <input type="checkbox" name="email_users" id="email_users" class="form-check-input"<?= $CFG['email_users'] == "true" ? ' checked' : ''?>>
+            <label for="email_users" class="form-check-label">
+                <strong>Should the users (<?= $ulist ?>) be emailed when a page has been modified?</strong>
+            </label>
+        </div>
 
-        <h2>Set Administrator Email</h2>
-        <p>If Email Notifications is enabled, this address will be the address notifications will be appear
+        <h3>Set Administrator Email</h3>
+        <div class="alert alert-info">
+        If Email Notifications is enabled, this address will be the address notifications will appear
         to be from, and the address used for replies to that email.
-        </p>
+        </div>
 
-        <table style="width:100%;">
-        <tr><td>
-        Name<br /><input type="text" name="admin_name" value="<?= htmlClean($CFG['admin_name']) ?>">
-        </td><td>
-        Email<br /><input type="text" name="admin_email" value="<?= htmlClean($CFG['admin_email']) ?>">
-        </td></tr>
-        <tr><td colspan="2">
-        <p>
-        Optionally, add a note regarding the administrator. This is not used in the script,
-        it is only saved in the configuration section for later reference.
-        </p>
-        Notes<br /><textarea name="admin_notes" cols="40" rows="2"><?= htmlClean($CFG['admin_notes']) ?></textarea>
-        </td></tr>
-        </table>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="admin_name" class="form-label">Name</label>
+                <input type="text" name="admin_name" id="admin_name" class="form-control" value="<?= htmlClean($CFG['admin_name']) ?>">
+            </div>
+            <div class="col-md-6">
+                <label for="admin_email" class="form-label">Email</label>
+                <input type="email" name="admin_email" id="admin_email" class="form-control" value="<?= htmlClean($CFG['admin_email']) ?>">
+            </div>
+            <div class="col-12">
+                <label for="admin_notes" class="form-label">Notes <span class="text-muted">(optional)</span></label>
+                <div class="form-text mb-2">
+                    Optionally, add a note regarding the administrator. This is not used in the script,
+                    it is only saved in the configuration section for later reference.
+                </div>
+                <textarea name="admin_notes" id="admin_notes" class="form-control" rows="3"><?= htmlClean($CFG['admin_notes']) ?></textarea>
+            </div>
+        </div>
         <?php
         else:
         ?>
-        <p>No email addresses were entered. The Notify Users feature is redundant.</p>
-        <br/><br/>
+        <div class="alert alert-warning">No email addresses were entered. The Notify Users feature is redundant.</div>
         <?php
         endif;
         ?>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['email_notifications'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton"  type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-flex justify-content-between gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['email_notifications'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1473,7 +1353,7 @@ switch ($display_step):
 
     case $steps['page_name'] :
         ?>
-        <h2>Page Name</h2>
+        <h2 class="card-title">Page Name</h2>
 
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="install_step" value="<?= $steps['page_name'] ?>" />
@@ -1482,53 +1362,61 @@ switch ($display_step):
         <?php
 
         if ($upgrade_performed == true || $upgrade_performed == "true") {
-            echo "<b>Upgrading</b><p>You are performing an upgrade, and thus the individual pages will not be affected. There is currently <b>no way</b> to upgrade the actual pages themselves (what is being upgraded is the 'editthispage_XYZ.php' file, which contains the EditThisPage code). If you would rather make a fresh install, move aside or delete the 'editthispage_*' files out of the installation directory AND the install-etp.php file, put a fresh copy of install-etp.php in the directory and rerun the installation.";
+            ?>
+            <div class="alert alert-warning">
+                <strong>Upgrading:</strong> You are performing an upgrade, and thus the individual pages will not be affected. 
+                There is currently <strong>no way</strong> to upgrade the actual pages themselves (what is being upgraded is the 
+                'editthispage_XYZ.php' file, which contains the EditThisPage code). If you would rather make a fresh install, 
+                move aside or delete the 'editthispage_*' files out of the installation directory AND the install-etp.php file, 
+                put a fresh copy of install-etp.php in the directory and rerun the installation.
+            </div>
+            <?php
         } else {
         if (isset($msgs['failed_page_name']) && $msgs['failed_page_name']) :
             ?>
             <?php
             if ($msgs['failed_page_name_empty']) :
                 ?>
-
-                <p class="error">You need to set a name for the new page.</p>
-
+                <div class="alert alert-danger">You need to set a name for the new page.</div>
                 <?php
             endif;
             if ($msgs['failed_page_name_exists']) :
                 ?>
-
-                <p class="error">A file with that name already exists.</p>
-
+                <div class="alert alert-danger">A file with that name already exists.</div>
                 <?php
             endif;
             if ($msgs['failed_page_name_no_extension']) :
                 ?>
-
-                <p class="error">Please include an extension for the name your page will be saved under (e.g. 'index.php').</p>
-
+                <div class="alert alert-danger">Please include an extension for the name your page will be saved under (e.g. 'index.php').</div>
                 <?php
             endif;
         endif;
         if (!$page_name) $page_name = "index.php";
         ?>
 
-        <p>
-        The name your page will be saved under.
-        This should include the extension, but not the path to the file, e.g. "index.php".
-        <br />
-        <input type="text" name="pagename" value="<?= @$page_name ?>" />
-        </p>
+        <div class="mb-3">
+            <label for="pagename" class="form-label">Page Filename</label>
+            <input type="text" name="pagename" id="pagename" class="form-control" value="<?= @$page_name ?>" />
+            <div class="form-text">
+                The name your page will be saved under. This should include the extension, but not the path to the file, e.g. "index.php".
+            </div>
+        </div>
 
-        <h2>Page Title</h2>
-        <p>The title for your page. This will be displayed in the title bar of the browser and RSS feeds.
-        <br />
-        <input type="text" name="page_title" value="<?= @$page_title ?>" />
-        </p>
+        <div class="mb-3">
+            <label for="page_title" class="form-label">Page Title</label>
+            <input type="text" name="page_title" id="page_title" class="form-control" value="<?= @$page_title ?>" />
+            <div class="form-text">
+                The title for your page. This will be displayed in the title bar of the browser and RSS feeds.
+            </div>
+        </div>
         <?php } ?>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['page_name'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-flex justify-content-between gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['page_name'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1539,37 +1427,44 @@ switch ($display_step):
     case $steps['rss_setup'] :
         ?>
 
-        <h2>RSS Options</h2>
+        <h2 class="card-title">RSS Options</h2>
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="install_step" value="<?= $steps['rss_setup'] ?>" />
         <input type="hidden" name="process" value="1" />
-        <p>The RSS shows recent versions of your page.</p>
-        <p>Feed title
-        <br />
-        <input type="text" name="feed_title" value="<?= !$RSS['title'] ? $page_title . ' RSS Title' : htmlClean($RSS['title']) ?>">
-        </p>
+        
+        <div class="alert alert-info">The RSS shows recent versions of your page.</div>
+        
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="feed_title" class="form-label">Feed Title</label>
+                <input type="text" name="feed_title" id="feed_title" class="form-control" value="<?= !$RSS['title'] ? $page_title . ' RSS Title' : htmlClean($RSS['title']) ?>">
+            </div>
+            <div class="col-md-6">
+                <label for="feed_description" class="form-label">Feed Description</label>
+                <input type="text" name="feed_description" id="feed_description" class="form-control" value="<?= !$RSS['description'] ? $page_title . ' RSS Feed' : htmlClean($RSS['description']) ?>">
+            </div>
+        </div>
 
-        <p>Feed description
-        <br />
-        <input type="text" name="feed_description" value="<?= !$RSS['description'] ? $page_title . ' RSS Feed' : htmlClean($RSS['description']) ?>" style="width:30em">
-        </p>
+        <h3 class="mt-4">RSS Diff Feed Options</h3>
+        <div class="alert alert-info">The RSS diff feed shows recent additions and deletions to your page. Set the feed title and description here.</div>
 
-        <h2>RSS Diff Feed Options</h2>
-        <p>The RSS diff feed shows recent additions and deletions to your page. Set the feed title and description here.</p>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="feed_title_diff" class="form-label">Diff Feed Title</label>
+                <input type="text" name="feed_title_diff" id="feed_title_diff" class="form-control" value="<?= !$RSS['title_diff'] ? $page_title . ' Changes' : htmlClean($RSS['title_diff']) ?>">
+            </div>
+            <div class="col-md-6">
+                <label for="feed_description_diff" class="form-label">Diff Feed Description</label>
+                <input type="text" name="feed_description_diff" id="feed_description_diff" class="form-control" value="<?= !$RSS['description_diff'] ? $page_title . ' Changes Feed' : htmlClean($RSS['description']) ?>">
+            </div>
+        </div>
 
-        <p>Diff feed title
-        <br />
-        <input type="text" name="feed_title_diff" value="<?= !$RSS['title_diff'] ? $page_title . ' Changes' : htmlClean($RSS['title_diff']) ?>">
-        </p>
-
-        <p>Diff feed description
-        <br />
-        <input type="text" name="feed_description_diff" value="<?= !$RSS['description_diff'] ? $page_title . ' Changes Feed' : htmlClean($RSS['description']) ?>" style="width:30em">
-        </p>
-
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['rss_setup'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-flex justify-content-between gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['rss_setup'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1582,9 +1477,9 @@ case $steps['plugins']:
 <form action="<?= $PHP_SELF ?>" method="post">
 <input type="hidden" name="install_step" value="<?= $steps['plugins'] ?>" />
 <input type="hidden" name="process" value="1" />
-<h2>Plugins</h2>
-<p>The plugins listed below will be installed, as they are located in the "plugin" directory. Plugins may report errors here, as well, in case they discover that they will not function properly for some reason.</p>
-<ul>
+<h2 class="card-title">Plugins</h2>
+<div class="alert alert-info">The plugins listed below will be installed, as they are located in the "plugin" directory. Plugins may report errors here, as well, in case they discover that they will not function properly for some reason.</div>
+<ul class="list-group list-group-flush">
 <?php
 $got_plugs = false;
 $got_error = false;
@@ -1600,7 +1495,9 @@ while ($d && (false !== ($entry = $d->read()))) {
             $got_plugs = true;
             if (!$PLUGIN_NAME) $PLUGIN_NAME = $entry;
             if (!$PLUGIN_VER) $PLUGIN_VER = "?";
-            echo ("<li> <b>" . $PLUGIN_NAME . "</b> (v" . $PLUGIN_VER . ") [" . $entry . "] &rarr; " . ($PLUGIN_ERROR ? "<font color=red>" . $PLUGIN_ERROR . "</font>" : "<font color=green>OK</font>") . "</li>");
+            $statusBadge = $PLUGIN_ERROR ? '<span class="badge bg-danger me-2">✗</span>' : '<span class="badge bg-success me-2">✓</span>';
+            $statusText = $PLUGIN_ERROR ? '<span class="text-danger">' . $PLUGIN_ERROR . '</span>' : '<span class="text-success">OK</span>';
+            echo "<li class='list-group-item d-flex align-items-center'>$statusBadge <strong>" . $PLUGIN_NAME . "</strong> (v" . $PLUGIN_VER . ") [$entry] → $statusText</li>";
             $got_error |= $PLUGIN_ERROR;
             if ($PLUGIN_CONFIG) {
                 $fh = @fopen("plugin/" . $entry, 'a');
@@ -1614,15 +1511,34 @@ while ($d && (false !== ($entry = $d->read()))) {
         } else $notaplug .= ($notaplug ? ", " : "") . $entry;
     }
 }
-if ($notaplug) { echo "<li><font color=grey>The following files do not claim that they are plugins, which may mean they are support files for one: <b>$notaplug</b></font></li>"; }
-if ($unwritable) { echo "<li><font color=red>The following plugins require that the install script can modify the plugin files directly, but the files are currently readonly -- the installer is unable to provide configuration for these plugins: <b>$unwritable</b></font> (in linux, this is addressed by doing <b>chmod a+w plugin/*</b>)</li>"; }
-if (!$got_plugs) { echo "<li><font color=grey>No plugins were found.</font></li>"; }
+if ($notaplug) { 
+    echo "<li class='list-group-item text-muted'><span class='badge bg-secondary me-2'>i</span>The following files do not claim that they are plugins, which may mean they are support files for one: <strong>$notaplug</strong></li>"; 
+}
+if ($unwritable) { 
+    echo "<li class='list-group-item text-danger'><span class='badge bg-danger me-2'>✗</span>The following plugins require that the install script can modify the plugin files directly, but the files are currently readonly -- the installer is unable to provide configuration for these plugins: <strong>$unwritable</strong> (in linux, this is addressed by doing <code>chmod a+w plugin/*</code>)</li>"; 
+}
+if (!$got_plugs) { 
+    echo "<li class='list-group-item text-muted'><span class='badge bg-light text-dark me-2'>-</span>No plugins were found.</li>"; 
+}
 ?>  
 </ul>
-<p><?= $got_error ? "<font color=red>There were errors in at least one of the plugins listed above. ETP will still attempt to install the plugin in question, but there's of course the chance that things crash and burn if you don't fix the above.</font>" : "If a plugin is not listed above, you need to copy its .php file to the plugin directory and then reload this page. If a plugin is listed that you do not want, delete the file from the \"plugin\" directory before continuing." ?></p>
-<div class="buttoncontainer">
-<input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['plugins'] ?>'" value="&lt;&lt; Back" />
-<input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+
+<?php if ($got_error): ?>
+<div class="alert alert-danger mt-3">
+There were errors in at least one of the plugins listed above. ETP will still attempt to install the plugin in question, but there's of course the chance that things crash and burn if you don't fix the above.
+</div>
+<?php else: ?>
+<div class="alert alert-info mt-3">
+If a plugin is not listed above, you need to copy its .php file to the plugin directory and then reload this page. If a plugin is listed that you do not want, delete the file from the "plugin" directory before continuing.
+</div>
+<?php endif; ?>
+
+<div class="d-flex justify-content-between gap-2 mt-4">
+<button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['plugins'] ?>'">« Back</button>
+<div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">Next »</button>
+    <button type="submit" name="finish" class="btn btn-success">Finish</button>
+</div>
 </div>
 
 </form>
@@ -1636,85 +1552,85 @@ break;
         <?php
         if ($msgs['failed_required_settings']) :
             ?>
-            <h2>Configuration Error</h2>
-            <p class="error">Not all required settings have been configured:</p>
+            <h2 class="card-title text-danger">Configuration Error</h2>
+            <div class="alert alert-danger">Not all required settings have been configured:</div>
 
             <?php
             if ($msgs['no_hostname']) :
                 ?>
-
-                <p>You need to configure your hostname.<br />
-                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['hostname'] ?>">Set Hostname</a>
-                </p>
-
+                <div class="alert alert-warning">
+                You need to configure your hostname.<br />
+                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['hostname'] ?>" class="btn btn-sm btn-primary">Set Hostname</a>
+                </div>
                 <?php
             endif;
             if ($msgs['no_user_accounts']) :
                 ?>
-
-                <p>No user accounts have been created; your page will not be accessible.<br />
-                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['create_accounts'] ?>">Create Accounts</a>
-                </p>
-
+                <div class="alert alert-warning">
+                No user accounts have been created; your page will not be accessible.<br />
+                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['create_accounts'] ?>" class="btn btn-sm btn-primary">Create Accounts</a>
+                </div>
                 <?php
             endif;
             if ($msgs['no_page_name']) :
                 ?>
-
-                <p>You need to set a file name for your page.<br />
-                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['page_name'] ?>">Set Page Name</a>
-                </p>
-
+                <div class="alert alert-warning">
+                You need to set a file name for your page.<br />
+                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['page_name'] ?>" class="btn btn-sm btn-primary">Set Page Name</a>
+                </div>
                 <?php
             endif;
             ?>
-            <br /><br />
             <?php
         else:
             ?>
 
-            <h2>Confirm Settings</h2>
+            <h2 class="card-title">Confirm Settings</h2>
 
-            <p>These user accounts have been created:</p>
+            <div class="alert alert-info">These user accounts have been created:</div>
 
-            <table style="width:100%;">
+            <table class="table table-striped table-hover">
+            <thead class="table-light">
             <tr>
             <th>Username</th>
             <th>Group</th>
             <th>Email</th>
-            <th>&nbsp;</th>
             </tr>
+            </thead>
+            <tbody>
 
             <?php
             foreach ($users as $k => $v):
+                $badgeClass = $v['group'] == 'super-editor' ? 'bg-success' : 
+                              ($v['group'] == 'editor' ? 'bg-primary' : 'bg-secondary');
                 ?>
                 <tr>
                 <td><?= $v['name'] ?></td>
-                <td><?= $v['group'] ?></td>
+                <td><span class="badge <?= $badgeClass ?>"><?= $v['group'] ?></span></td>
                 <td><?= $v['email'] ?></td>
                 </tr>
 
                 <?php
             endforeach;
             ?>
+            </tbody>
             </table>
 
             <?php
             if ($msgs['no_super_editor']) :
                 ?>
-
-                <p><em>No super-editor account was found.</em> You can add one in
-                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['create_accounts'] ?>">Create Accounts</a>.
+                <div class="alert alert-warning">
+                <strong>No super-editor account was found.</strong> You can add one in
+                <a href="<?= $PHP_SELF ?>?install_step=<?= $steps['create_accounts'] ?>" class="btn btn-sm btn-primary">Create Accounts</a>.
                 If no super-editor account is created, some functions will not be available.
-                </p>
-
+                </div>
                 <?php
             endif;
             ?>
 
-            <p>
-            Your page will be saved as <em><?= $page_name ?></em>
-            </p>
+            <div class="alert alert-success">
+            Your page will be saved as <strong><?= $page_name ?></strong>
+            </div>
 
             <p>
             If you are satisfied with these settings, click Install to complete your installation.
@@ -1723,9 +1639,9 @@ break;
             <form action="<?= $PHP_SELF ?>" method="post">
             <input type="hidden" name="install_step" value="<?= $next_steps['confirm'] ?>" />
             <input type="hidden" name="process" value="1" />
-            <div class="buttoncontainer">
-            <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['confirm'] ?>'" value="&lt;&lt; Back" />
-            <input class="formbutton"  type="submit" value="Install &gt;&gt;" />
+            <div class="d-flex justify-content-between gap-2 mt-4">
+            <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['confirm'] ?>'">« Back</button>
+            <button type="submit" class="btn btn-success btn-lg">Install »</button>
             </div>
 
             </form>
@@ -1755,11 +1671,14 @@ break;
     break;
 
 endswitch;
-echo "<i>Step " . (1+$display_step) . " / " . count($steps) . "</i>";
 ?>
-
-</div>
-<div style="clear:both"></div>
+                </div>
+            </div>
+            <div class="mt-3 text-muted small text-center">
+                Step <?= (1+$display_step) ?> / <?= count($steps) ?>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
