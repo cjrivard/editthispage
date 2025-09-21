@@ -5682,6 +5682,7 @@ $continue_action = empty($_POST['continue_action']) ? $action : $_POST['continue
 
 // get current user, if already logged in
 $auth_user = isset($_SESSION['auth_user']) ? $_SESSION['auth_user'] : false;
+$hashed_action = false;
 
 // if user is unset, check for hashed login
 if (!$auth_user && $hashed_action) {
