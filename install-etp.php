@@ -870,177 +870,24 @@ if ($finalize || $install_step == $steps['confirm']) {
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EditThisPage Install v0.8</title>
+<link href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
-body, table, th, td {
-    font-family: arial, helvetica, sans-serif;
-    font-size: 10pt;
-}
-
-th {
-    font-style:normal;
-    font-weight:700;
-    text-align:left;
-}
-
-h1 {
-    margin-top:0px;
-    padding-top:0px;
-    margin-bottom:0px;
-    padding-bottom:0px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:14pt;
-    color: #676d87;
-    float:right;
-    height:20px;
-}
-
-h2 {
-    margin-top:0px;
-    padding-top:10px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:12pt;
-    color: #676d87;
-    border-bottom: 1px solid #b7bdc7;
-}
-
-em {
-    font-style: normal;
-    font-weight: 700;
-}
-
-form {
-    padding: 0px;
-    margin: 0px;
-}
-
-.formbutton {
-    margin: 3px;
-    padding: 0px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:10pt;
-    width: 120px;
-    border:1px solid;
-    border-color:#666 #333 #333 #666;
-    background-color: #b7bdc7;
-}
-
+/* Custom styles to work with Bootstrap */
 .ok {
-    color: #085;
+    color: #198754;
 }
-.notok{
-    color: #900;
+.notok {
+    color: #dc3545;
 }
-
-.buttoncontainer {
-    text-align:right;
-    margin-top: 30px;
- }
-
-#container {
-    position:relative;
-    width:730px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:50px;
-    padding: 5px;
-
-    background-color:#e4e7ed;
-    border:2px solid #b7bdc7;
-}
-
-#steps {
-    position:absolute;
-    padding: 3px 3px 10px 3px;
-    top:38px;
-    left:5px;
-    width:120px;
-    font-size:8pt;
-}
-
-#steps a {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    color:#000;
-}
-#steps a:visited {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    color:#000;
-}
-#steps a:hover {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: underline;
-    color:#000;
-}
-#steps a:active {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: underline;
-    color:#000;
-}
-
-#steps li {
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-
-#steps li:hover, #steps li.over {
-	color: #e90;
-}
-
-#steps ul {
-    margin: 2px 0px 0px 15px;
-    padding: 0px;
-    list-style-type: disc;
-	color: #00c;
-}
-
-#config {
-    margin: 0px 0px 0px 145px;
-    padding: 7px;
-    width:576px;
-    clear:right;
-    background-color:#e4e7ed;
-}
-
-#config a {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: none;
-    color:#229;
-}
-#config a:visited {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: none;
-    color:#229;
-}
-#config a:hover {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: underline;
-    color:#229;
-}
-#config a:active {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: underline;
-    color:#229;
-}
-
 .error {
     font-weight: 700;
 }
-
 </style>
 
 
@@ -1067,35 +914,41 @@ window.onload=startList;
 </script>
 </head>
 <body>
-<div id="container">
-<div id="steps">
-<ul id="stepslist">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h5>Installation Steps</h5>
+        </div>
+        <div class="list-group list-group-flush">
 <?php
 foreach ($install_labels as $k => $v):
-    if ($display_step == $k) {
-        $bulletstyle = ' style="color:#085;"';
-        $linkstyle = ' style="font-weight:700"';
-    } else {
-        $bulletstyle = '';
-        $linkstyle = '';
-    }
+    $isActive = ($display_step == $k);
+    $activeClass = $isActive ? ' active' : '';
+    $textClass = $isActive ? ' text-white' : '';
+    
     if ($k == $steps['install']) :
         ?>
-        <li<?= $bulletstyle ?>><a<?= $linkstyle ?> href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['confirm'] ?>"><?= $v ?></a></li>
+        <a href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['confirm'] ?>" class="list-group-item list-group-item-action<?= $activeClass ?>"><?= $v ?></a>
         <?php
     else:
         ?>
-        <li<?= $bulletstyle ?>><a<?= $linkstyle ?> href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $k ?>"><?= $v ?></a></li>
+        <a href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $k ?>" class="list-group-item list-group-item-action<?= $activeClass ?>"><?= $v ?></a>
         <?php
     endif;
 endforeach;
 ?>
-</ul>
-</div>
+        </div>
+      </div>
+    </div>
 
-<div id="config">
-<h1>EditThisPagePHP Install v0.8</h1>
-<div style="clear:both"></div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">EditThisPagePHP Install v0.8</h3>
+        </div>
+        <div class="card-body">
 
 <?php
 // display dialog
@@ -1103,26 +956,27 @@ switch ($display_step):
     // initial tests
     case $steps['test']:
         ?>
-        <h2>Testing Your Setup</h2>
-        <table style="width:100%;">
+        <h4>Testing Your Setup</h4>
+        <table class="table table-striped">
+        <tbody>
         <tr><td>
         Can we write to the install script?
         </td><td>
 
-        <?= $msgs['failed_write'] ? '<span class="notok">FAIL</span>' : '<span class="ok">OK</span>' ?>
+        <?= $msgs['failed_write'] ? '<span class="badge bg-danger">FAIL</span>' : '<span class="badge bg-success">OK</span>' ?>
 
         </td></tr>
 
         <tr><td>
         Can we create new files in the install directory?
         </td><td>
-        <?= $msgs['failed_makefile'] ? '<span class="notok">FAIL</span>' : '<span class="ok">OK</span>' ?>
+        <?= $msgs['failed_makefile'] ? '<span class="badge bg-danger">FAIL</span>' : '<span class="badge bg-success">OK</span>' ?>
         </td></tr>
 
         <tr><td>
         Can we create new directories?
         </td><td>
-        <?= $msgs['failed_makedir'] ? '<span class="notok">FAIL</span>' : '<span class="ok">OK</span>' ?>
+        <?= $msgs['failed_makedir'] ? '<span class="badge bg-danger">FAIL</span>' : '<span class="badge bg-success">OK</span>' ?>
         </td></tr>
 
         <?php
@@ -1131,45 +985,43 @@ switch ($display_step):
             <tr><td>
             Can we create new files in this directory?
             </td><td>
-            <?= $msgs['failed_makenewdirfile'] ? '<span class="notok">FAIL</span>' : '<span class="ok">OK</span>' ?>
+            <?= $msgs['failed_makenewdirfile'] ? '<span class="badge bg-danger">FAIL</span>' : '<span class="badge bg-success">OK</span>' ?>
             </td></tr>
             <?php
         endif;
         ?>
 
+        </tbody>
         </table>
 
         <?php
         if ($msgs['count_failed']):
             ?>
-            <p>
-            Failed <?= $msgs['count_failed'] ?> out of <?= $msgs['count_tests'] ?> tests. Installation will not continue.
-            </p><p>
-
+            <div class="alert alert-danger">
+            <strong>Failed <?= $msgs['count_failed'] ?> out of <?= $msgs['count_tests'] ?> tests.</strong> Installation will not continue.
+            </div>
+            
             <p>
             This is likely due to the permission settings on the directory or the <?= $install_file_name ?>
-            script. The web server must be able to write to <?= $install_file_name ?>  and the directory where
+            script. The web server must be able to write to <?= $install_file_name ?> and the directory where
             it is located.
             </p>
 
-            <p>
-            Try the following to correct this:
-            <ul>
-            <li>Change to the directory to which you uploaded <?= $install_file_name ?>
-            <li>Make the file world writeable:<br />
-            $ chmod a+w <?=  $install_file_name?></li>
-            <li>Make the directory accessible to all:<br />
-            $ chgrp chmod a+w,a+x ./</li>
-
-            <li>Click "Test Again" to check your setup again.</li>
+            <h5>Try the following to correct this:</h5>
+            <ul class="list-group">
+            <li class="list-group-item">Change to the directory to which you uploaded <?= $install_file_name ?></li>
+            <li class="list-group-item">Make the file world writeable:<br />
+            <code>$ chmod a+w <?=  $install_file_name?></code></li>
+            <li class="list-group-item">Make the directory accessible to all:<br />
+            <code>$ chmod a+w,a+x ./</code></li>
+            <li class="list-group-item">Click "Test Again" to check your setup again.</li>
             </ul>
-            </p>
 
             <form action="<?= $PHP_SELF ?>" method="post">
             <input type="hidden" name="install_step" value="<?= $steps['test'] ?>">
 
-            <div class="buttoncontainer">
-            <input class="formbutton" type="submit" value="Test Again">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <input class="btn btn-primary" type="submit" value="Test Again">
             </div>
 
             </form>
@@ -1177,21 +1029,24 @@ switch ($display_step):
             <?php
         else:
             ?>
-            <p>
-            All tests passed. Click "Next" to continue. You can move to any step in the installation
+            <div class="alert alert-success">
+            <strong>All tests passed!</strong> Click "Next" to continue. You can move to any step in the installation
             using the menu at the left.
-            </p><p>
+            </div>
+            <p>
             You may abort the installation at any time.
             </p>
-            <em>Note: if you abort the installation, be sure to remove the install script <?= $file['basename'] ?>
-            from the server, or others will be able to access it.</em>
-            </p>
+            <div class="alert alert-warning">
+            <strong>Note:</strong> if you abort the installation, be sure to remove the install script <?= $file['basename'] ?>
+            from the server, or others will be able to access it.
+            </div>
 
             <form action="<?= $PHP_SELF ?>" method="post">
             <input type="hidden" name="install_step" value="<?= $next_steps['test'] ?>">
 
-            <div class="buttoncontainer">
-            <input class="formbutton" type="submit" value="Next &gt;&gt;"><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <input class="btn btn-primary" type="submit" value="Next &gt;&gt;">
+            <input class="btn btn-success" type="submit" value="Finish" name="finish">
             </div>
 
             </form>
@@ -1203,26 +1058,27 @@ switch ($display_step):
 
     case $steps['hostname']:
         ?>
-        <h2>Set Hostname</h2>
+        <h4>Set Hostname</h4>
         <p>
         Set the hostname of the server. This will be used for creating links to RSS feeds, administration
         functions and images.
         </p>
-        <p>
-        The hostname appears to be <?= $_SERVER['SERVER_NAME'] ?>
-        <?= isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != $_SERVER['SERVER_NAME'] ? ' or ' . $_SERVER['HTTP_HOST'] :'' ?>
-        </p>
+        <div class="alert alert-info">
+        The hostname appears to be <strong><?= $_SERVER['SERVER_NAME'] ?></strong><?= isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != $_SERVER['SERVER_NAME'] ? ' or <strong>' . $_SERVER['HTTP_HOST'] . '</strong>' :'' ?>
+        </div>
 
-        <p>
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="install_step" value="<?= $steps['hostname'] ?>" />
         <input type="hidden" name="process" value="1" />
-        <input type="text" name="server_name" value="<?= $CFG['server_name'] ? $CFG['server_name'] : $_SERVER['SERVER_NAME'] ?>">
-        </p>
+        <div class="mb-3">
+          <label for="server_name" class="form-label">Server Hostname</label>
+          <input type="text" class="form-control" id="server_name" name="server_name" value="<?= $CFG['server_name'] ? $CFG['server_name'] : $_SERVER['SERVER_NAME'] ?>">
+        </div>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['hostname'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <input class="btn btn-secondary" type="button" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['hostname'] ?>'" value="&lt;&lt; Back" />
+        <input class="btn btn-primary" type="submit" value="Next &gt;&gt;" />
+        <input class="btn btn-success" type="submit" value="Finish" name="finish">
         </div>
 
         </form>
@@ -1758,9 +1614,12 @@ endswitch;
 echo "<i>Step " . (1+$display_step) . " / " . count($steps) . "</i>";
 ?>
 
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div style="clear:both"></div>
-</div>
+<script src="https://unpkg.com/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 <?php
