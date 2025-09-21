@@ -870,241 +870,105 @@ if ($finalize || $install_step == $steps['confirm']) {
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EditThisPage Install v0.8</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <style type="text/css">
-body, table, th, td {
-    font-family: arial, helvetica, sans-serif;
-    font-size: 10pt;
-}
-
-th {
-    font-style:normal;
-    font-weight:700;
-    text-align:left;
-}
-
-h1 {
-    margin-top:0px;
-    padding-top:0px;
-    margin-bottom:0px;
-    padding-bottom:0px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:14pt;
-    color: #676d87;
-    float:right;
-    height:20px;
-}
-
-h2 {
-    margin-top:0px;
-    padding-top:10px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:12pt;
-    color: #676d87;
-    border-bottom: 1px solid #b7bdc7;
-}
-
-em {
-    font-style: normal;
-    font-weight: 700;
-}
-
-form {
-    padding: 0px;
-    margin: 0px;
-}
-
-.formbutton {
-    margin: 3px;
-    padding: 0px;
-    font-family: arial, helvetica, sans-serif;
-    font-size:10pt;
-    width: 120px;
-    border:1px solid;
-    border-color:#666 #333 #333 #666;
-    background-color: #b7bdc7;
-}
-
+/* Custom styles to complement Bootstrap */
 .ok {
-    color: #085;
+    color: #198754;
+    font-weight: 600;
 }
-.notok{
-    color: #900;
-}
-
-.buttoncontainer {
-    text-align:right;
-    margin-top: 30px;
- }
-
-#container {
-    position:relative;
-    width:730px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:50px;
-    padding: 5px;
-
-    background-color:#e4e7ed;
-    border:2px solid #b7bdc7;
+.notok {
+    color: #dc3545;
+    font-weight: 600;
 }
 
-#steps {
-    position:absolute;
-    padding: 3px 3px 10px 3px;
-    top:38px;
-    left:5px;
-    width:120px;
-    font-size:8pt;
+.install-steps .nav-link {
+    color: #495057;
+    border-radius: 0;
+    border: none;
+    padding: 0.5rem 0.75rem;
 }
 
-#steps a {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    color:#000;
-}
-#steps a:visited {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    color:#000;
-}
-#steps a:hover {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: underline;
-    color:#000;
-}
-#steps a:active {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: underline;
-    color:#000;
+.install-steps .nav-link:hover {
+    color: #007bff;
+    background-color: #e9ecef;
 }
 
-#steps li {
-    margin-top: 3px;
-    margin-bottom: 3px;
+.install-steps .nav-link.active {
+    color: #198754;
+    font-weight: 600;
+    background-color: #e7f3e7;
 }
 
-#steps li:hover, #steps li.over {
-	color: #e90;
+.install-header {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
 }
 
-#steps ul {
-    margin: 2px 0px 0px 15px;
-    padding: 0px;
-    list-style-type: disc;
-	color: #00c;
+.install-card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
-
-#config {
-    margin: 0px 0px 0px 145px;
-    padding: 7px;
-    width:576px;
-    clear:right;
-    background-color:#e4e7ed;
-}
-
-#config a {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: none;
-    color:#229;
-}
-#config a:visited {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: none;
-    color:#229;
-}
-#config a:hover {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: underline;
-    color:#229;
-}
-#config a:active {
-    margin: 0px;
-    padding: 3px;
-    text-decoration: underline;
-    color:#229;
-}
-
-.error {
-    font-weight: 700;
-}
-
 </style>
 
 
-<script type="text/javascript">
-// add li:hover to IE
-startList = function() {
-	if (document.all && document.getElementById) {
-		navRoot = document.getElementById("stepslist");
-		for (i=0; i<navRoot.childNodes.length; i++) {
-			node = navRoot.childNodes[i];
-			if (node.nodeName=="LI") {
-				node.onmouseover=function() {
-					this.className+=" over";
-				}
-				node.onmouseout=function() {
-					this.className=this.className.replace(" over", "");
-				}
-			}
-		}
-	}
-}
-window.onload=startList;
-
-</script>
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="container">
-<div id="steps">
-<ul id="stepslist">
-<?php
-foreach ($install_labels as $k => $v):
-    if ($display_step == $k) {
-        $bulletstyle = ' style="color:#085;"';
-        $linkstyle = ' style="font-weight:700"';
-    } else {
-        $bulletstyle = '';
-        $linkstyle = '';
-    }
-    if ($k == $steps['install']) :
-        ?>
-        <li<?= $bulletstyle ?>><a<?= $linkstyle ?> href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['confirm'] ?>"><?= $v ?></a></li>
-        <?php
-    else:
-        ?>
-        <li<?= $bulletstyle ?>><a<?= $linkstyle ?> href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $k ?>"><?= $v ?></a></li>
-        <?php
-    endif;
-endforeach;
-?>
-</ul>
+<div class="install-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="h2 mb-0">EditThisPagePHP Install v0.8</h1>
+                <p class="mb-0 opacity-75">Modern wiki/CMS installation wizard</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="config">
-<h1>EditThisPagePHP Install v0.8</h1>
-<div style="clear:both"></div>
-
-<?php
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card install-card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Installation Steps</h5>
+                </div>
+                <div class="card-body p-0">
+                    <nav class="nav nav-pills flex-column install-steps">
+                        <?php
+                        foreach ($install_labels as $k => $v):
+                            $activeClass = ($display_step == $k) ? ' active' : '';
+                            $href = ($k == $steps['install']) ? 
+                                $_SERVER['PHP_SELF'] . '?install_step=' . $steps['confirm'] :
+                                $_SERVER['PHP_SELF'] . '?install_step=' . $k;
+                            ?>
+                            <a class="nav-link<?= $activeClass ?>" href="<?= $href ?>"><?= $v ?></a>
+                        <?php endforeach; ?>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="card install-card">
+                <div class="card-body"><?php
 // display dialog
 switch ($display_step):
     // initial tests
     case $steps['test']:
         ?>
-        <h2>Testing Your Setup</h2>
-        <table style="width:100%;">
+        <h2 class="card-title">Testing Your Setup</h2>
+        <table class="table table-sm table-hover">
+        <tbody>
         <tr><td>
         Can we write to the install script?
         </td><td>
@@ -1137,6 +1001,7 @@ switch ($display_step):
         endif;
         ?>
 
+        </tbody>
         </table>
 
         <?php
@@ -1168,8 +1033,8 @@ switch ($display_step):
             <form action="<?= $PHP_SELF ?>" method="post">
             <input type="hidden" name="install_step" value="<?= $steps['test'] ?>">
 
-            <div class="buttoncontainer">
-            <input class="formbutton" type="submit" value="Test Again">
+            <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-warning">Test Again</button>
             </div>
 
             </form>
@@ -1190,8 +1055,9 @@ switch ($display_step):
             <form action="<?= $PHP_SELF ?>" method="post">
             <input type="hidden" name="install_step" value="<?= $next_steps['test'] ?>">
 
-            <div class="buttoncontainer">
-            <input class="formbutton" type="submit" value="Next &gt;&gt;"><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+            <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">Next &gt;&gt;</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
             </div>
 
             </form>
@@ -1203,26 +1069,30 @@ switch ($display_step):
 
     case $steps['hostname']:
         ?>
-        <h2>Set Hostname</h2>
+        <h2 class="card-title">Set Hostname</h2>
         <p>
         Set the hostname of the server. This will be used for creating links to RSS feeds, administration
         functions and images.
         </p>
-        <p>
-        The hostname appears to be <?= $_SERVER['SERVER_NAME'] ?>
-        <?= isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != $_SERVER['SERVER_NAME'] ? ' or ' . $_SERVER['HTTP_HOST'] :'' ?>
-        </p>
+        <div class="alert alert-info">
+        The hostname appears to be <strong><?= $_SERVER['SERVER_NAME'] ?></strong>
+        <?= isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] != $_SERVER['SERVER_NAME'] ? ' or <strong>' . $_SERVER['HTTP_HOST'] . '</strong>' :'' ?>
+        </div>
 
-        <p>
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="install_step" value="<?= $steps['hostname'] ?>" />
         <input type="hidden" name="process" value="1" />
-        <input type="text" name="server_name" value="<?= $CFG['server_name'] ? $CFG['server_name'] : $_SERVER['SERVER_NAME'] ?>">
-        </p>
+        <div class="mb-3">
+            <label for="server_name" class="form-label">Server Name:</label>
+            <input type="text" name="server_name" id="server_name" class="form-control" value="<?= $CFG['server_name'] ? $CFG['server_name'] : $_SERVER['SERVER_NAME'] ?>">
+        </div>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['hostname'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-flex justify-content-between gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['hostname'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1233,24 +1103,29 @@ switch ($display_step):
 
     case $steps['guest_access']:
         ?>
-        <h2>Guest Access</h2>
+        <h2 class="card-title">Guest Access</h2>
         <p>
         Do you want to make this page publicly accessible?
         </p>
-        <p>
+        <div class="alert alert-warning">
         If "yes", a default guest account will be created in the next step. This does not give guests
         editing permissions. Do not delete this account, or anonymous visitors will not be able to view the page. 
-        </p>
-        <p>
+        </div>
+        
         <form action="<?= $PHP_SELF ?>" method="post">
         <input type="hidden" name="process" value="1" />
         <input type="hidden" name="install_step" value="<?= $steps['guest_access'] ?>" />
-        <input type="checkbox" name="guest_access_allowed" value="true"<?= $guest_access_allowed  == "true" ? ' checked' : '' ?> /> Yes
-        </p>
+        <div class="form-check mb-4">
+            <input type="checkbox" name="guest_access_allowed" value="true" id="guest_access" class="form-check-input"<?= $guest_access_allowed  == "true" ? ' checked' : '' ?> />
+            <label for="guest_access" class="form-check-label">Yes, allow public access</label>
+        </div>
 
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['guest_access'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton" type="submit" value="Next &gt;&gt;" /><br /><input class="formbutton" type="submit" value="Finish" name="finish">
+        <div class="d-flex justify-content-between gap-2 mt-4">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['guest_access'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1260,34 +1135,45 @@ switch ($display_step):
 
     case $steps['create_accounts']:
         ?>
-        <h2>Create Accounts</h2>
-        <p><em>Create accounts for users:</em> guest accounts can view the page. Editors have access to
+        <h2 class="card-title">Create Accounts</h2>
+        <div class="alert alert-info">
+        <strong>Create accounts for users:</strong> guest accounts can view the page. Editors have access to
         image and history functions, and can edit the main body content of the page. Super-editors
-        can access all functions. You should have at least one super-editor account.</p>
+        can access all functions. You should have at least one super-editor account.
+        </div>
         <p>Setting an email address will send notifications to that user of changes to the page, if
         this is enabled in the next step.</p>
 
         <?php
         if (empty($users)):
             ?>
-            <p>No accounts have been created.</p>
+            <div class="alert alert-warning">No accounts have been created.</div>
             <?php
         else:
             ?>
-            <table style="width:100%;">
+            <table class="table table-striped table-hover">
+            <thead class="table-light">
             <tr>
             <th>Username</th>
             <th>Group</th>
             <th>Email</th>
-            <th>&nbsp;</th>
+            <th>Actions</th>
             </tr>
+            </thead>
+            <tbody>
 
             <?php
             foreach ($users as $k => $v):
                 ?>
                 <tr>
                 <td><?= htmlClean($v['name']) ?></td>
-                <td><?= htmlClean($v['group']) ?></td>
+                <td>
+                    <?php
+                    $badgeClass = $v['group'] == 'super-editor' ? 'bg-success' : 
+                                  ($v['group'] == 'editor' ? 'bg-primary' : 'bg-secondary');
+                    ?>
+                    <span class="badge <?= $badgeClass ?>"><?= htmlClean($v['group']) ?></span>
+                </td>
                 <td><?= htmlClean($v['email']) ?></td>
                 <td>
                 <?php
@@ -1297,23 +1183,25 @@ switch ($display_step):
                     $title = 'Delete user account';
                 }
                 ?>
-                <a href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['create_accounts'] ?>&process=1&deluser=<?= $k ?>" title="<?= $title ?>">Delete</a>
+                <a href="<?= $_SERVER['PHP_SELF'] ?>?install_step=<?= $steps['create_accounts'] ?>&process=1&deluser=<?= $k ?>" 
+                   class="btn btn-sm btn-outline-danger" title="<?= $title ?>">Delete</a>
                 </td>
                 </tr>
 
                 <?php
             endforeach;
             ?>
+            </tbody>
             </table>
             <?php
         endif;
         ?>
 
-        <h2>Add User</h2>
+        <h3 class="mt-4">Add User</h3>
         <?php
         if (isset($msgs['failed_add_user']) && $msgs['failed_add_user']):
             ?>
-            <p><?= $msgs['failed_add_user'] ?></p>
+            <div class="alert alert-danger"><?= $msgs['failed_add_user'] ?></div>
             <?php
         endif;
         ?>
@@ -1321,53 +1209,34 @@ switch ($display_step):
         <input type="hidden" name="install_step" value="<?= $steps['create_accounts'] ?>" />
         <input type="hidden" name="process" value="1" />
 
-        <table style="width:100%">
-        <tr>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="group" class="form-label">Group</label>
+                <select name="group" id="group" class="form-select">
+                    <option value="guest">Guest</option>
+                    <option value="editor">Editor</option>
+                    <option value="super-editor">Super-editor</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <label for="email" class="form-label">Email <span class="text-muted">(optional)</span></label>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+            </div>
+        </div>
 
-        <td>
-        Username
-        </td><td>
-        <input type="text" name="username">
-        </td>
-
-        <td>
-        Group
-        </td><td>
-        <select name="group">
-        <option value="guest">Guest</option>
-        <option value="editor">Editor</option>
-        <option value="super-editor">Super-editor</option>
-        </select>
-        </td>
-
-        </tr><tr>
-
-        <td>
-        Email
-        (optional)
-        </td><td colspan="3">
-        <input type="text" name="email">
-        </td>
-
-        </tr><tr>
-
-        <td>
-        Password
-        </td><td>
-        <input type="password" name="password">
-        </td>
-
-        <td>
-        Confirm
-        </td><td>
-        <input type="password" name="confirm_password">
-        </td>
-
-        </tr>
-
-        </table>
-
-        <script language="Javascript1.2">
+        <script>
         function checkAccountFields()
         {
             if (document.user_form.username.value == ''
@@ -1379,14 +1248,14 @@ switch ($display_step):
             }
             return true;
         }
-
         </script>
-        <div style="text-align:right;margin-top:10px;">
-        <input class="formbutton"  type="submit" value="Add User" onclick="return checkAccountFields()" />
+        
+        <div class="d-flex justify-content-end mt-3">
+            <button type="submit" class="btn btn-success" onclick="return checkAccountFields()">Add User</button>
         </div>
         </form>
 
-        <script language="Javascript1.2">
+        <script>
         function accountFieldsEmpty()
         {
             if (document.user_form.username.value != ''
@@ -1399,14 +1268,16 @@ switch ($display_step):
                     + "\n\"Ok\" will proceed.");
             }
         }
-
         </script>
 
-        <form action="<?= $PHP_SELF ?>" method="post">
+        <form action="<?= $PHP_SELF ?>" method="post" class="mt-4">
         <input type="hidden" name="install_step" value="<?= $next_steps['create_accounts'] ?>" />
-        <div class="buttoncontainer">
-        <input class="formbutton" type="button" style="float:left" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['create_accounts'] ?>'" value="&lt;&lt; Back" />
-        <input class="formbutton"  type="submit" value="Next &gt;&gt;" onclick="return accountFieldsEmpty()" /><br /><input class="formbutton" type="submit" value="Finish" name="finish" onclick="return accountFieldsEmpty()" />
+        <div class="d-flex justify-content-between gap-2">
+        <button type="button" class="btn btn-outline-secondary" onclick="document.location='<?= $PHP_SELF ?>?install_step=<?= $prev_steps['create_accounts'] ?>'">« Back</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary" onclick="return accountFieldsEmpty()">Next »</button>
+            <button type="submit" name="finish" class="btn btn-success" onclick="return accountFieldsEmpty()">Finish</button>
+        </div>
         </div>
 
         </form>
@@ -1755,11 +1626,14 @@ break;
     break;
 
 endswitch;
-echo "<i>Step " . (1+$display_step) . " / " . count($steps) . "</i>";
 ?>
-
-</div>
-<div style="clear:both"></div>
+                </div>
+            </div>
+            <div class="mt-3 text-muted small text-center">
+                Step <?= (1+$display_step) ?> / <?= count($steps) ?>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
