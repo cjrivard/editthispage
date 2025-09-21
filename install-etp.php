@@ -878,6 +878,52 @@ if ($finalize || $install_step == $steps['confirm']) {
 <title>EditThisPage Install v0.8</title>
 <link href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
+/* Fallback Bootstrap-like styles in case CDN is blocked */
+.container-fluid { max-width: 100%; padding: 0 15px; }
+.row { display: flex; flex-wrap: wrap; margin: 0 -15px; }
+.col-md-3 { flex: 0 0 25%; max-width: 25%; padding: 0 15px; }
+.col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; padding: 0 15px; }
+.col-md-9 { flex: 0 0 75%; max-width: 75%; padding: 0 15px; }
+.col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; padding: 0 15px; }
+.card { border: 1px solid #dee2e6; border-radius: 0.5rem; background: #fff; }
+.card-header { padding: 0.75rem 1.25rem; border-bottom: 1px solid #dee2e6; background: #f8f9fa; }
+.card-body { padding: 1.25rem; }
+.card-title { margin-bottom: 0.5rem; font-size: 1.25rem; }
+.list-group-flush .list-group-item { border-right: 0; border-left: 0; border-radius: 0; }
+.list-group-item { padding: 0.75rem 1.25rem; border: 1px solid #dee2e6; background: #fff; }
+.list-group-item-action { color: #495057; text-decoration: none; }
+.list-group-item-action:hover { background: #f8f9fa; }
+.list-group-item.active { background: #007bff; border-color: #007bff; color: #fff; }
+.table { width: 100%; border-collapse: collapse; }
+.table-striped tbody tr:nth-of-type(odd) { background-color: rgba(0,0,0,.05); }
+.table td, .table th { padding: 0.75rem; border-top: 1px solid #dee2e6; }
+.alert { padding: 0.75rem 1.25rem; border: 1px solid transparent; border-radius: 0.25rem; }
+.alert-success { color: #155724; background-color: #d4edda; border-color: #c3e6cb; }
+.alert-info { color: #0c5460; background-color: #d1ecf1; border-color: #bee5eb; }
+.alert-warning { color: #856404; background-color: #fff3cd; border-color: #ffeaa7; }
+.alert-danger { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; }
+.badge { padding: 0.375rem 0.5rem; font-size: 0.75rem; border-radius: 0.25rem; }
+.bg-success { background-color: #28a745 !important; color: #fff; }
+.bg-danger { background-color: #dc3545 !important; color: #fff; }
+.btn { padding: 0.375rem 0.75rem; border: 1px solid transparent; border-radius: 0.25rem; cursor: pointer; text-decoration: none; }
+.btn-primary { background-color: #007bff; border-color: #007bff; color: #fff; }
+.btn-secondary { background-color: #6c757d; border-color: #6c757d; color: #fff; }
+.btn-success { background-color: #28a745; border-color: #28a745; color: #fff; }
+.d-grid { display: grid; }
+.d-md-flex { display: flex; }
+.justify-content-md-end { justify-content: flex-end; }
+.gap-2 { gap: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.form-control { padding: 0.375rem 0.75rem; border: 1px solid #ced4da; border-radius: 0.25rem; width: 100%; }
+.form-label { margin-bottom: 0.5rem; font-weight: 500; }
+.form-check { padding-left: 1.25em; }
+.form-check-input { margin-left: -1.25em; }
+.form-check-label { padding-left: 0.25rem; }
+@media (max-width: 767.98px) {
+  .col-md-3, .col-md-4, .col-md-8, .col-md-9 { flex: 0 0 100%; max-width: 100%; }
+}
+
 /* Custom styles to work with Bootstrap */
 .ok {
     color: #198754;
