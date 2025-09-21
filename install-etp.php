@@ -5610,10 +5610,18 @@ if ($RSS['image']) {
  * to each filelink. This way you can remove "__EDIT_BUTTON__" from
  * the content page.
  *
- * Usage: http://example.com/index.php?admin
+ * Usage: http://example.com/index.php?admin (web) or php script.php admin (command line)
  * Contributed by Urs Gehrig <urs@circle.ch>
  */
+// Check for admin access from both web GET parameter and command line argument
+$admin_requested = false;
 if (isset($_GET['admin'])) {
+    $admin_requested = true;
+} elseif (php_sapi_name() === 'cli' && isset($argv) && in_array('admin', $argv)) {
+    $admin_requested = true;
+}
+
+if ($admin_requested) {
 
     $t = pathinfo(__FILE__);
     $contentfiles = glob('*.' . $t['extension']);
