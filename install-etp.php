@@ -3326,13 +3326,14 @@ function getLockFile($file)
             // if ($lock_vars) {
                 $pairs = explode('&', $lock_vars);
                 foreach ($pairs as $entry) {
-                    list($key, $value) = explode("=", $entry, 2);
-                    if (!array_key_exists($key, $lock_data)) {
-                        $lock_data[$key] = $value;
-                        $LOCK_VARS[$key] = $value;
+                    if (strpos($entry, '=') !== false) {
+                        list($key, $value) = explode("=", $entry, 2);
+                        if (!array_key_exists($key, $lock_data)) {
+                            $lock_data[$key] = $value;
+                            $LOCK_VARS[$key] = $value;
+                        }
                     }
                 }
-                // }
         }
     }
 
@@ -5820,6 +5821,7 @@ foreach ($TOKENS as $name => $token) {
 // and flag setting should be in this switch block
 // information retrieved for display follows
 $output_rss = false;
+$no_script_output = false;
 
 switch ($action) {
 
@@ -6666,6 +6668,7 @@ if (isset($display['page'])) {
 
            // and make sure that we don't try output an RSS feed
            $output_rss = false;
+           $no_script_output = false;
         }
     }
 }
