@@ -5613,7 +5613,7 @@ if ($RSS['image']) {
  * Usage: http://example.com/index.php?admin
  * Contributed by Urs Gehrig <urs@circle.ch>
  */
-if ($_SERVER["argv"][0] == 'admin') {
+if (isset($_GET['admin'])) {
 
     $t = pathinfo(__FILE__);
     $contentfiles = glob('*.' . $t['extension']);
